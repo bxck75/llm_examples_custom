@@ -4,11 +4,26 @@ from langchain.agents import initialize_agent, AgentType
 from langchain.callbacks import StreamlitCallbackHandler
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import DuckDuckGoSearchRun
+from langchain.agents import initialize_agent, Tool
+from langchain_experimental.smart_llm import SmartLLMChain 
+from HuggingChatLLM import best_llm, gpt_llm, llms, img_dir, serp_search, embeddings
+from credits import HUGGINGFACE_EMAIL,HUGGINGFACE_PASS,HUGGINGFACE_TOKEN,OPENAI_API_KEY,ELEVENLABS_API_KEY,SERPAPI_API_KEY
+from langchain.vectorstores import FAISS
+
 
 with st.sidebar:
-    openai_api_key = st.text_input("OpenAI API Key", key="langchain_search_api_key_openai", type="password")
-    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
-    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/pages/2_Chat_with_search.py)"
+    # Other input parameters
+    class1 = st.sidebar.text_input('Enter class 1')
+    class2 = st.sidebar.text_input('Enter class 2')
+    class3 = st.sidebar.text_input('Enter class 3')
+    persistent_dir = st.sidebar.text_input('Enter persistent directory')
+    vector_in_dir = st.sidebar.text_input('Enter vector in directory')
+    logfile_path = st.sidebar.text_input('Enter logfile path')
+    api_keys = st.sidebar.text_input('Enter API keys csv')
+    #openai_api_key = OPENAI_API_KEY
+    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+    f"[Get an OpenAI API key][{OPENAI_API_KEY}](https://platform.openai.com/account/api-keys)"
+    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
     "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
 
 st.title("🔎 LangChain - Chat with search")
